@@ -17,6 +17,7 @@ public class BusinessException extends Exception{
     private String errorMsg;
 
     public BusinessException(ResultStatusCode resultStatusCode){
+        super("业务异常 - " + resultStatusCode.getMsg());
         this.errorCode = resultStatusCode.getCode();
         this.errorMsg =resultStatusCode.getMsg();
     }

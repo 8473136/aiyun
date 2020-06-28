@@ -30,7 +30,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        log.info("请求返回数据类型class={}", body.getClass().getName());
+//        log.info("请求返回数据类型class={}", body.getClass().getName());
         Result result = null;
         if (body instanceof Result){
             result = (Result) body;

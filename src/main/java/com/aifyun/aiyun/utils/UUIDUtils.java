@@ -14,11 +14,4 @@ public class UUIDUtils {
     public static String getUUID(){
         return UUID.randomUUID().toString().replace("-","");
     }
-
-    public static void main(String[] args) {
-        UserDTO userDTO = new UserDTO();
-        System.out.println(userDTO.getId());
-        System.out.println(userDTO.getCreateTime());
-        System.out.println(userDTO.getUpdateTime());
-    }
 }
