@@ -4,10 +4,7 @@ import com.aifyun.aiyun.core.BusinessException;
 import com.aifyun.aiyun.service.UserService;
 import com.aifyun.aiyun.vo.UserRegisteredVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -36,5 +33,12 @@ public class UserController {
     public String login(@RequestBody UserRegisteredVO userRegisteredVO) throws BusinessException {
         return userService.login(userRegisteredVO);
     }
+
+    @PostMapping("refreshToken")
+    public String refreshToken(@RequestParam String token){
+        return userService.refreshToken(token);
+    }
+
+
 
 }

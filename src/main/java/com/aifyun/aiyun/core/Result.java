@@ -11,7 +11,7 @@ public class Result {
     /**
      * 返回的代码，200表示成功，其他表示失败
      */
-    private int code;
+    private Integer code;
     /**
      * 成功或失败时返回的错误信息
      */

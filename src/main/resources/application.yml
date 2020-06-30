@@ -23,3 +23,7 @@ pagehelper:
 #主键方式
 mapper:
   identity: MYSQL
+auth:
+  Login:
+    #不拦截的请求 逗号隔开
+    NotInterception: "/user/login,/user/registered"

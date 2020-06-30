@@ -38,10 +38,10 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
             result = new Result();
             result.setCode(ResultStatusCode.SUCCESS.getCode());
             result.setMsg(ResultStatusCode.SUCCESS.getMsg());
-            result.setData(body);
+            result.setData(body == null ? "" : body);
         }
         //处理返回值是String的情况
-        if (body instanceof String) {
+        if (body instanceof String || body == null) {
             return JSON.toJSONString(result);
         }
         return result;

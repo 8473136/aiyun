@@ -1,3 +1,4 @@
+import com.aifyun.aiyun.utils.TokenUtils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -15,49 +16,8 @@ import java.util.Date;
 public class JWTest {
 
     public static void main(String [] args){
-        // 设置一个私钥，也可以使用KeyProvider产生，参见：
-        // @link https://github.com/auth0/java-jwt#using-a-keyprovider
-        String key = "Shenpibaipao";
-        // 给定一个算法，如HmacSHA-256
-        Algorithm alg = Algorithm.HMAC256(key);
-
-        // 1 签发Token
-        Date currentTime = new Date();
-        String token = JWT.create()
-                .withIssuer("CSDN Blog") // 发行者
-                .withSubject("userid") // 用户身份标识
-                .withAudience("CSDN User") // 用户单位
-                .withIssuedAt(currentTime) // 签发时间
-                .withExpiresAt(new Date(currentTime.getTime() + 24*3600*1000L)) // 一天有效期
-                .withJWTId("001") // 分配JWT的ID
-                .withClaim("PublicClaimExample", "You should not pass!") // 定义公共域信息
-                .sign(alg);
-
-        System.out.println("生成的Token是:"+token);
-
-        // 2 验证Token
-        JWTVerifier verifier = JWT.require(alg)
-                .withIssuer("CSDN Blog")
-                .withAudience("CSDN User")
-                .build();
-        try{
-            verifier.verify(token);
-            System.out.println("验证通过!");
-        } catch (JWTVerificationException e) {
-            e.printStackTrace();
-            System.out.println("验证失败!");
-        }
-
-        // 3 尝试解码
-        try{
-            DecodedJWT originToken = JWT.decode(token);
-            System.out.println("解码得到发行者是:"+originToken.getIssuer());
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            System.out.println("解码得到签发时间是:"+sdf.format(originToken.getIssuedAt()));
-            System.out.println("解码得到公共域信息是:"+originToken.getClaim("PublicClaimExample").asString());
-        } catch (JWTDecodeException e){
-            e.printStackTrace();
-        }
+        String token = "aeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzIasdf1NiJ9.eyJzdWIiOiI5ZmQwZTM2ZGYxOTI0ZDc5YWU5YTRjMmY1MGExNzk5ZSIsImF1ZCI6ImFpX3l1bl9zeXN0ZW0iLCJsb2dpblVzZXIiOiJ7XCJhdmF0YXJcIjpcImh0dHBzOi8vaW1nMi53b3lhb2dleGluZy5jb20vMjAyMC8wNi8yOC84ODlmMzI4M2I5ZDQ0OWUzYmQzNGY2NDU3NDhmZDVhOSE0MDB4NDAwLmpwZWdcIixcImNyZWF0ZWRUaW1lXCI6XCIyMDIwLTA2LTI4IDEwOjQzOjQ3XCIsXCJlbWFpbFwiOlwiODQ3MzEzNkBxcS5jb21cIixcImlkXCI6XCI5ZmQwZTM2ZGYxOTI0ZDc5YWU5YTRjMmY1MGExNzk5ZVwiLFwiaXNEZWxldGVlZFwiOjAsXCJzYWx0XCI6XCIwMjEyN2EwN2U1MzQ0Nzg4YTYxZTBmNTMxZDQxMjM1NlwiLFwidXBkYXRlZFRpbWVcIjpcIjIwMjAtMDYtMjggMTA6NDM6NDdcIixcInVzZXJHcm91cHNcIjpcImU2MWFlMjZlYTdkYzRjNmY4YTZhNTMzODhhOGVlMDlkXCIsXCJ1c2VyUGFzc3dvcmRcIjpcIjJCNzU2MTBFMDRENzk3M0VCRjBGRThBRkVDQTkzMzAxXCJ9IiwiaXNzIjoiYWlfeXVuX3N5c3RlbSIsImV4cCI6MTU5MzQxODE4OCwiaWF0IjoxNTkzNDE4MTg3LCJqdGkiOiI2MTQ2NmMzZDY3YTE0MjEwYTEyZmZlMTM1MTg4NjdhYyJ9.lMhr7EHS3x5tW-y8B1Bex_uqgvXaZhEwD0pugEM4CjY";
+        System.out.println(TokenUtils.verifier(token));
 
     }
 

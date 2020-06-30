@@ -9,14 +9,21 @@ import com.aifyun.aiyun.mapper.UserMapper;
 import com.aifyun.aiyun.service.UserService;
 import com.aifyun.aiyun.utils.DateUtils;
 import com.aifyun.aiyun.utils.MD5Utils;
+import com.aifyun.aiyun.utils.TokenUtils;
 import com.aifyun.aiyun.utils.UUIDUtils;
 import com.aifyun.aiyun.vo.UserRegisteredVO;
+import com.alibaba.fastjson.JSON;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.stereotype.Service;
 import sun.security.provider.MD5;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -42,15 +49,14 @@ public class UserServiceImpl implements UserService {
         userDTO.setIsDeleteed(0);
         userDTO = userMapper.selectOne(userDTO);
 
-
-
         // 用户名密码不正确
         if (userDTO == null || !MD5Utils.verification(userRegisteredVO.getPassword(),userDTO.getSalt(),userDTO.getUserPassword())){
             throw new BusinessException(ResultStatusCode.PASSWORD_ERROR);
         }
 
+        String token = TokenUtils.getToken(userDTO);
 
-        return null;
+        return token;
     }
 
     /**
@@ -69,5 +75,14 @@ public class UserServiceImpl implements UserService {
         userDTO.setAvatar(GlobalVariables.DEFAULT_avatar_URL);
         userDTO.setUserGroups(GlobalVariables.DEFAULT_USER_GROUB_ID);
         userMapper.insertSelective(userDTO);
+    }
+
+
+    @Override
+    public String refreshToken(String token) {
+        if (TokenUtils.verifier(token)) {
+            token = TokenUtils.getToken(TokenUtils.decrypt(token));
+        }
+        return token;
     }
 }

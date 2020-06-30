@@ -4,16 +4,15 @@ import com.aifyun.aiyun.utils.UUIDUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
 import java.util.Random;
+import java.util.UUID;
 
 
 public class MD5Test {
 
     public static void main(String args[]) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId("11");
-        System.out.println(userDTO.getId());
-
+        System.out.println(MD5Utils.MD5(UUIDUtils.getUUID()));
     }
 
 }

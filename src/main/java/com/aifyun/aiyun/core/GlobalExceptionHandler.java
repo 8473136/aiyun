@@ -28,5 +28,4 @@ public class GlobalExceptionHandler {
         }
         return result;
     }
-
 }

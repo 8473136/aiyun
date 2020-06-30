@@ -16,4 +16,8 @@ public class DateUtils {
         return simpleDateFormat.format(new Date());
     }
 
+    public static String yMdHmsFormat(Date date){
+        return simpleDateFormat.format(date);
+    }
+
 }

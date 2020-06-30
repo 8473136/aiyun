@@ -7,4 +7,6 @@ public interface UserService {
     void registered(UserRegisteredVO userRegisteredVO);
 
     String login(UserRegisteredVO userRegisteredVO) throws BusinessException;
+
+    String refreshToken(String token);
 }
