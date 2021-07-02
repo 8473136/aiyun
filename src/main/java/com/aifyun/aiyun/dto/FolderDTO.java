@@ -3,11 +3,14 @@ package com.aifyun.aiyun.dto;
 import com.aifyun.aiyun.core.BaseDTO;
 import lombok.Data;
 
+import javax.persistence.Table;
+
 /**
  * @author LiuchangLan
  * @date 2020/6/30 11:53
  */
 @Data
+@Table(name = "aiyun_folder")
 public class FolderDTO extends BaseDTO {
     // 文件夹名称
     private String folderName;

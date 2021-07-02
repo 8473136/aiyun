@@ -1,5 +1,7 @@
 package com.aifyun.aiyun.utils;
 
+import com.aifyun.aiyun.core.BusinessException;
+import com.aifyun.aiyun.core.ResultStatusCode;
 import com.aifyun.aiyun.dto.UserDTO;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -10,6 +12,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.StyledEditorKit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +24,7 @@ import java.util.Date;
  */
 @Slf4j
 public class TokenUtils {
+
     public static final String TOKEN_SECRET = "A5D833ABE7685BA6AB2E30BD8156E6E";
 
     /**
@@ -88,4 +93,21 @@ public class TokenUtils {
         UserDTO userDTO = JSON.parseObject(publicClaimExample, UserDTO.class);
         return userDTO;
     }
+
+
+    /**
+     * @description 从cookice中获取用户信息
+     * @author LiuChangLan
+     * @since 2020/6/30 14:49
+     */
+    public static UserDTO decryptByRequest(HttpServletRequest request){
+        UserDTO userDTO = new UserDTO();
+        for (Cookie cookie : request.getCookies()) {
+                if ("accessToken".equals(cookie.getName()) && TokenUtils.verifier(cookie.getValue())) {
+                        userDTO = TokenUtils.decrypt(cookie.getValue());
+                }
+        }
+        return userDTO;
+    }
+
 }

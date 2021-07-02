@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 
 /**
+ * DTO父类
  * @author LiuchangLan
  * @date 2020/6/27 23:02
  */
@@ -24,12 +25,12 @@ public class BaseDTO {
      * 创建时间
      */
     @Column(name = "created_time")
-    private String createdTime;
+    private String createTime;
     /**
      * 修改时间
      */
     @Column(name = "updated_time")
-    private String updatedTime;
+    private String updateTime;
     /**
      * 删除标识 0 正常 1删除
      */

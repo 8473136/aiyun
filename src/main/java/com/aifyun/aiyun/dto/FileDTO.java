@@ -4,11 +4,14 @@ import com.aifyun.aiyun.core.BaseDTO;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Data;
 
+import javax.persistence.Table;
+
 /**
  * @author LiuchangLan
  * @date 2020/6/30 11:53
  */
 @Data
+@Table(name = "aiyun_file")
 public class FileDTO extends BaseDTO {
     // 文件大小 单位MB
     private Integer fileSize;

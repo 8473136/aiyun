@@ -29,11 +29,11 @@ public class TableUtils {
 
     public static void main(String[] args) throws SQLException {
         List<String> cloumns = new ArrayList<String>(){{
-            add("create_by");
-            add("update_by");
-            add("create_time");
-            add("update_time");
-            add("is_deleteed");
+            add("created_by");
+            add("updated_by");
+            add("created_time");
+            add("updated_time");
+            add("is_deleted");
             add("id");
         }};
         Connection connection = DriverManager.getConnection(URL, USER , PASSWORD);
